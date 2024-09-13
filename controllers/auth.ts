@@ -9,7 +9,7 @@ const { user: User } = prisma;
 export const login = async (req: any, res: any) => {
   if (req.body.email == null || req.body.password == null) {
     res.status(400).send({
-      message: "Email, and Password are required",
+      message: "Email, and Password are required !",
     });
   }
 
@@ -27,7 +27,7 @@ export const login = async (req: any, res: any) => {
     if (await bcrypt.compare(req.body.password, identity.password)) {
       const { id, email } = identity;
 
-      const salt = process.env.JWT || "secretKey"
+      const salt = process.env.JWT || "secretKey";
       //generate jwt token with 4h expiration
       const token = jwt.sign({ email, id }, salt, {
         expiresIn: "4h",
